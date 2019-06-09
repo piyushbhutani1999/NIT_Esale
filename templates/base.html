@@ -1,0 +1,91 @@
+
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>Maroon</title>
+        <link rel="stylesheet" href="{%static 'css/basecss.css'%}">
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+            <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+            <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    </head>
+    <body >
+        <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand"  style = "font-size:32px ; color: white;font-weight:9px;">MAROON</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="{%url 'home'%}" style = "font-size:20px;">Home</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="{% url 'aboutus'%}" style = "font-size:20px;">About Us</a>
+        </li>
+        <li><a href="{% url 'add_product'%}" style = "font-size:20px;">Post Add</a></li>
+        {% if  user.is_authenticated %}
+        <li><a href="#" style = "font-size:20px;">Profile</a></li>
+        {%endif%}
+      </ul>
+        {% if  user.is_authenticated %}
+
+
+			<ul class="nav navbar-nav navbar-right">
+				<li class="nav-item">
+                    <li><a href="" style = "font-size:20px;"><span class="glyphicon glyphicon-user"></span> {{ user.username }}</a></li>
+				</li>
+                <li class="nav-item">
+					 <li><a href="" style = "font-size:20px;"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+				</li>
+			</ul>
+			{% else %}
+
+
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'signup'%}" style = "font-size:20px;"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="{% url 'login'%}" style = "font-size:20px;"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+  
+        <div class="inner-page">
+        {% block content%}
+        {% endblock content%}
+        </div>
+        <div id="contact" class="container-fluid bg-grey">
+  <h2 class="text-center">CONTACT</h2>
+  <div class="row">
+    <div class="col-sm-5">
+      <p>Contact us and we'll get back to you within 24 hours.</p>
+      <p><span class="glyphicon glyphicon-map-marker"></span>Chandigarh, India</p>
+      <p><span class="glyphicon glyphicon-phone"></span> +91 7494961878</p>
+      <p><span class="glyphicon glyphicon-envelope"></span> emailidofpiyush@gmail.com</p>
+    </div>
+  </div>
+</div>
+<script>
+  $(window).scroll(function() {
+    $(".slideanim").each(function(){
+      var pos = $(this).offset().top;
+
+      var winTop = $(window).scrollTop();
+        if (pos < winTop + 600) {
+          $(this).addClass("slide");
+        }
+    });
+  });
+</script>
+    </body>
+</html>

@@ -1,0 +1,13 @@
+
+Product Info
+
+    <div class='jumbotron'>
+        <form enctype='multipart/form-data' method='POST'>
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input class='btn btn-primary'  type='submit' value='Save Product'>
+        </form>
+    </div>
+<h1>this is a add product page</h1>
+{{request.user.id}}
+

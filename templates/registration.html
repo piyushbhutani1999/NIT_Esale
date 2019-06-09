@@ -1,0 +1,10 @@
+
+    <div class='jumbotron'>
+        <form method='POST'>
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input class='btn btn-primary'  type='submit' value='Register'>
+        </form>
+    </div>
+
+

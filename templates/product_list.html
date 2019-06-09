@@ -1,0 +1,94 @@
+
+<!------ Include the above in your HEAD tag ---------->
+ {% extends "base.html" %}
+ {% block content %}
+<h1>featured object list</h1><br>
+
+{% for obj in featured_object_list %}
+{% comment %} <a href = "{{obj.get_absolute_url}}">
+<h1>{{obj.title}}</h1></a><br>
+<h1>{{obj.description}}</h1><br>
+<h1>{{obj.price}}</h1><br>
+<h1>{{obj.seller_id}}</h1>
+<img src ="{{ obj.image.url }}"> {% endcomment %}
+{% comment %} 
+    <div class="col-12 col-md-6 col-lg-3">
+                <div class="portfolio-content">
+                    <figure>
+                        <img src="{{ obj.image.url }}" alt="">
+                    </figure>
+
+                    <div class="entry-content flex flex-column align-items-center justify-content-center">
+                        <h3><a href="#">Flower Skin</a></h3>
+
+                        <ul class="flex flex-wrap justify-content-center">
+                            <li><a href="#">Portfolio,</a></li>
+                            <li><a href="#">Tree</a></li>
+                        </ul>
+                    </div><!-- .entry-content -->
+                </div><!-- .portfolio-content -->
+            </div><!-- .col --> {% endcomment %}
+
+{% endfor %}
+            <div class="container">
+  <h2>Image Gallery</h2>
+  <p>The .thumbnail class can be used to display an image gallery.</p>
+  <p>The .caption class adds proper padding and a dark grey color to text inside thumbnails.</p>
+  <p>Click on the images to enlarge them.</p>
+ <div class="row">
+{% for obj in rest_object_list %}
+{% comment %} 
+<h1>{{obj.title}}</h1><br>
+<h1>{{obj.description}}</h1><br>
+<h1>{{obj.price}}</h1><br>
+<h1>{{obj.seller_id}}</h1>
+<img src ="{{ obj.image.url }}"> {% endcomment %}
+
+    {% comment %} <div class="col-12 col-md-6 col-lg-3">
+                <div class="portfolio-content">
+                    <figure>
+                        <img src="{{ obj.image.url }}" alt="">
+                    </figure>
+
+                    <div class="entry-content flex flex-column align-items-center justify-content-center">
+                        <h3><a href="#">Flower Skin</a></h3>
+
+                        <ul class="flex flex-wrap justify-content-center">
+                            <li><a href="#">Portfolio,</a></li>
+                            <li><a href="#">Tree</a></li>
+                        </ul>
+                    </div><!-- .entry-content -->
+                </div><!-- .portfolio-content -->
+            </div><!-- .col --> {% endcomment %}
+
+
+ 
+    <div class="col-md-4">
+      <div class="thumbnail ">
+          <img  src="{{ obj.image.url }}" alt="Lights" style="width:100%">
+          <div class="caption">
+            <p>{{obj.title}}</p><p>&#8377;{{obj.price}}</p>
+            <span><input class='btn btn-primary'  type='submit' value='Buy Now'></span>
+
+          </div>
+          
+        
+      </div>
+      
+    </div>
+ 
+
+
+
+
+{% endfor %}
+     
+     
+      </div>
+
+ </div>
+             {% endblock content %}
+            
+           
+           
+
