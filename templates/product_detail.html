@@ -13,7 +13,8 @@
 					<div class="product-meta">
 						<ul class="list-inline">
 							<li class="list-inline-item"><i class="fa fa-user-o"></i> By <a href="">{{query_set.seller_id.first_name}} {{query_set.seller_id.last_name}}</a></li>
-							<li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category<a href="">Electronics</a></li>
+							<li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category<a href="">{{query_set.category}}</a></li>
+							<li class="list-inline-item"><i class="fa fa-calendar"></i> Posted on<a href="">{{query_set.date}}</a></li>
 						</ul>
 					</div>
 
@@ -166,12 +167,12 @@
 							<ul class="list-inline">
 								<li class=""><i class="fa fa-user-o"></i> By <a href="">{{query_set.seller_id.first_name}} {{query_set.seller_id.last_name}}</a></li>
 								<li class=""><i class="fa fa-folder-open-o"></i> Email  <a href="">{{query_set.seller_id.email}}</a></li>
-								<li class=""><i class="fa fa-folder-open-o"></i> Phone   <a href="">{{query_set.seller_id.phone}}</a></li>
-								<li class=""><i class="fa fa-folder-open-o"></i> Member since <a href="">{{query_set.seller_id.date}}</a></li>
+								<li class=""><i class="fa fa-phone"></i> Phone   <a href="">{{query_set.seller_id.phone}}</a></li>
+								{% comment %} <li class=""><i class="fa fa-folder-open-o"></i> Member since <a href="">{{query_set.seller_id.date}}</a></li> {% endcomment %}
 							</ul>
 					</div>
 						<p class="member-time">{{query_set.seller_id.date}}</p>
-						<a href="">See all ads</a>
+						<a href="{% url 'product:home' %}">See all ads</a>
 						<ul class="list-inline mt-20">
 							<li class="list-inline-item"><a href="" class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3">Drop a message</a></li>
 							{% comment %} <li class="list-inline-item"><a href="" class="btn btn-offer d-inline-block btn-primary ml-n1 my-1 px-lg-4 px-md-3">Make an
