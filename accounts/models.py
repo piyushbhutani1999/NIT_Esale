@@ -7,7 +7,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 # accounts.models.py
 
 class UserManager(BaseUserManager):
-    def create_user(self, email,first_name,last_name, password=None):
+    def create_user(self, email,first_name,last_name, phone, college_name,password=None):
         """
         Creates and saves a User with the given email and password.
         """
@@ -15,11 +15,17 @@ class UserManager(BaseUserManager):
             raise ValueError('Users must have an email address')
         if not first_name:
             raise ValueError("Name Cannot Be left Blank")
+        if not phone:
+            raise ValueError("Phone Number Cannot Be left Blank")
+        if not college_name:
+            raise ValueError("College name must be selected")
 
         user = self.model(
             email=self.normalize_email(email),
             first_name = first_name,
             last_name = last_name,
+            phone = phone,
+            college_name = college_name
         )
 
         user.set_password(password)
@@ -53,14 +59,19 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-
+COLLEGE_CHOICES = (
+    ('','Select College'),
+    ('nitkkr','NIT KURUKSHETRA'),
+    ('thappar', 'THAPPAR , PATIALA')
+)
 class User(AbstractBaseUser):
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
         unique=True,
     )
-    phone_number = PhoneNumberField(unique = True, null=True, blank = False, region = 'IN', max_length = 13)
+    college_name = models.CharField(max_length=20, choices=COLLEGE_CHOICES, default='')
+    phone = PhoneNumberField(unique = True, null=True, blank = False, region = 'IN', max_length = 13) 
     first_name = models.CharField( max_length=20 , null = True, blank = False)
     last_name = models.CharField(max_length = 20 , null = True, blank = False)
     active = models.BooleanField(default=True)
@@ -69,7 +80,7 @@ class User(AbstractBaseUser):
     # notice the absence of a "Password field", that's built in.
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name','last_name'] # Email & Password are required by default.
+    REQUIRED_FIELDS = ['first_name','last_name','college_name','phone'] # Email & Password are required by default.
 
     objects = UserManager()
 

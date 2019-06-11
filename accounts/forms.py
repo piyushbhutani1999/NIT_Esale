@@ -1,7 +1,7 @@
 # accounts.forms.py
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
-
+from phonenumber_field.formfields import PhoneNumberField
 from .models import User
 
 
@@ -74,15 +74,24 @@ class UserAdminChangeForm(forms.ModelForm):
         return self.initial["password"]
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(max_length=50, required=True)
+    email = forms.EmailField(max_length = 50, required = True,widget=forms.EmailInput(attrs={'placeholder':'Username','class': 'border p-3 w-100 my-2'}))
     password = forms.CharField(
-        max_length=50, required=True, widget=forms.PasswordInput())
+    max_length=50, required=True, widget=forms.PasswordInput(attrs={'placeholder':'Password','class': 'border p-3 w-100 my-2'}))
 
 class UserRegisterForm(forms.ModelForm):
     class Meta:
         model=User
-        fields = [  'first_name','last_name', 'email','password']
-        widgets = {
-            'password': forms.PasswordInput(),
-            'email': forms.EmailInput()
-        }
+        fields = [  'first_name','last_name', 'email','phone','college_name','password']
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Firstname','class': 'border p-3 w-100 my-2'}))
+    last_name  = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Lastname','class': 'border p-3 w-100 my-2'}))
+    email = forms.CharField(widget=forms.EmailInput(attrs={'placeholder':'Email','class': 'border p-3 w-100 my-2'}))
+    phone = PhoneNumberField(region = 'IN', max_length = 13,widget = forms.TextInput(attrs={'placeholder':'Mobile Number','class': 'border p-3 w-100 my-2'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Password','class': 'border p-3 w-100 my-2'}))
+    
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model=User
+        fields = [ 'first_name','last_name']
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Firstname','class': 'form-control'}))
+    last_name  = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Lastname','class': 'form-control'}))
+    # password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Password','class': 'border p-3 w-100 my-2'}))

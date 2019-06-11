@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="user-profile section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0">
+				<div class="sidebar">
+					<!-- User Widget -->
+					<div class="widget user">
+						<!-- User Image -->
+						<div class="image d-flex justify-content-center">
+							<img src="{% static 'images/user.png'%}" alt="" class="">
+						</div>
+						<!-- User Name -->
+						<h5 class="text-center">{{user.first_name}}</h5>
+					</div>
+					<!-- Dashboard Links -->
+                    <div class="widget user-dashboard-menu">
+                         <ul>  
+                    <li  ><a href="{% url 'accounts:update_user_profile'%}"><i class="fa fa-user active"></i>Edit Profile ></a></li>
+                            <li ><a href="{% url 'accounts:myads'%}"><i class="fa fa-bookmark-o"></i> My Ads</a></li>
+                            <li><a href="" data-toggle="modal" data-target="#logoutaccount"><i class="fa fa-cog"></i> Logout</a></li>
+                            <li><a href="" data-toggle="modal" data-target="#deleteaccount"><i class="fa fa-power-off"></i>Delete
+                  Account</a></li>
+                    </ul>
+          </div>
+				</div>
+
+                <div class="modal fade" id="deleteaccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header border-bottom-0">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body text-center">
+                        <img src="images/account/Account1.png" class="img-fluid mb-2" alt="">
+                        <h6 class="py-2">Are you sure you want to delete your account?</h6>
+                        <p>Do you really want to delete these records? This process cannot be undone.</p>
+                        <textarea name="message" id="" cols="40" rows="4" class="w-100 rounded"></textarea>
+                      </div>
+                      <div class="modal-footer border-top-0 mb-3 mx-5 justify-content-lg-between justify-content-center">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- delete account popup modal end-->
+                <div class="modal fade" id="logoutaccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header border-bottom-0">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body text-center">
+                        <img src="images/account/Account1.png" class="img-fluid mb-2" alt="">
+                        <h6 class="py-2">Are you sure you want to Logout your account?</h6>
+                        <p>Keep smiling and selling products</p>
+                      </div>
+                      <div class="modal-footer border-top-0 mb-3 mx-5 justify-content-lg-between justify-content-center">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        <a href="{% url 'accounts:logout'%}"><button type="button" class="btn btn-danger">Logout</button></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+			</div>
+			<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
+				<!-- Edit Profile Welcome Text -->
+				<div class="widget welcome-message">
+					<h2>Edit profile</h2>
+					<p>Here you can edit your details. Give accurate details for better selling</p>
+				</div>
+				<!-- Edit Personal Info -->
+				<div class="row">
+					<div class="col-lg-6 col-md-6">
+						<div class="widget personal-info">
+							<h3 class="widget-header user">Edit Personal Information</h3>
+							<form method = "POST">{% csrf_token %}
+								<!-- First Name -->
+								<div class="form-group">
+									<label for="first-name">First Name</label>
+									{{form.first_name}}
+								</div>
+								<!-- Last Name -->
+								<div class="form-group">
+									<label for="last-name">Last Name</label>
+									{{form.last_name}}
+								</div>
+								<!-- File chooser -->
+								{% comment %} <div class="form-group choose-file d-inline-flex">
+									<i class="fa fa-user text-center px-3"></i>
+									<input type="file" class="form-control-file mt-2 pt-1" id="input-file">
+								 </div> {% endcomment %}
+								{% comment %} <!-- Comunity Name -->
+								<div class="form-group">
+									<label for="comunity-name">Comunity Name</label>
+									<input type="text" class="form-control" id="comunity-name">
+								</div>
+								<!-- Checkbox -->
+								<div class="form-check">
+								  <label class="form-check-label" for="hide-profile">
+									<input class="form-check-input mt-1" type="checkbox" value="" id="hide-profile">
+									Hide Profile from Public/Comunity
+								  </label>
+								</div> {% endcomment %}
+								<!-- Submit button -->
+								<button type="submit" class="btn btn-transparent">Save My Changes</button>
+							</form>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6">
+						<!-- Change Password -->
+					<div class="widget change-password">
+						<h3 class="widget-header user">Edit Password</h3>
+						<form action="#">
+							<!-- Current Password -->
+							<div class="form-group">
+								<label for="current-password">Current Password</label>
+								<input type="password" class="form-control" id="current-password">
+							</div>
+							<!-- New Password -->
+							<div class="form-group">
+								<label for="new-password">New Password</label>
+								<input type="password" class="form-control" id="new-password">
+							</div>
+							<!-- Confirm New Password -->
+							<div class="form-group">
+								<label for="confirm-password">Confirm New Password</label>
+								<input type="password" class="form-control" id="confirm-password">
+							</div>
+							<!-- Submit Button -->
+							<button class="btn btn-transparent">Change Password</button>
+						</form>
+					</div>
+					</div>
+					<div class="col-lg-6 col-md-6">
+						<!-- Change Email Address -->
+					<div class="widget change-email mb-0">
+						<h3 class="widget-header user">Edit Email Address</h3>
+						<form action="#">
+							<!-- Current Password -->
+							<div class="form-group">
+								<label for="current-email">Current Email</label>
+								<input type="email" class="form-control" id="current-email">
+							</div>
+							<!-- New email -->
+							<div class="form-group">
+								<label for="new-email">New email</label>
+								<input type="email" class="form-control" id="new-email">
+							</div>
+							<!-- Submit Button -->
+							<button class="btn btn-transparent">Change email</button>
+						</form>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% endblock content %}
