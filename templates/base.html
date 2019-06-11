@@ -128,7 +128,7 @@
                       </div>
                       <div class="modal-footer border-top-0 mb-3 mx-5 justify-content-lg-between justify-content-center">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                        <a href = "{% url 'accounts:logout'%}"><button type="button" class="btn btn-danger" >Delete</button></a>
+                        <a href = "{% url 'accounts:logout'%}"><button type="button" class="btn btn-danger" >Logout</button></a>
                       </div>
                     </div>
                   </div>
@@ -417,13 +417,13 @@
  function checkTerms() {
      if(document.formname.checkboxname.checked)
      {
-         document.formname.submitname.disabled=false;
+        document.formname.submitname.disabled=false;
      }
      else
      {
-         document.formname.submitname.disabled=true;
+        document.formname.submitname.disabled=true;
      }
- }
+ };
 function checkTermsSignup() {
     if(document.signupform.signupcheckbox.checked)
     {
@@ -433,9 +433,10 @@ function checkTermsSignup() {
     {
         document.signupform.signupsubmit.disabled=true;
     }
-}
-checkTerms();
+};
 checkTermsSignup();
+checkTerms();
+
  </script>
 
 </body>

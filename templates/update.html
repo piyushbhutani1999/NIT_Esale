@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 
 <section class="user-profile section">
@@ -13,12 +14,12 @@
 							<img src="{% static 'images/user.png'%}" alt="" class="">
 						</div>
 						<!-- User Name -->
-						<h5 class="text-center">{{user.first_name}}</h5>
+						<h5 class="text-center">{{user.first_name}} {{user.last_name}}</h5>
 					</div>
 					<!-- Dashboard Links -->
                     <div class="widget user-dashboard-menu">
                          <ul>  
-                    <li  ><a href="{% url 'accounts:update_user_profile'%}"><i class="fa fa-user active"></i>Edit Profile ></a></li>
+                    <li  ><a href="{% url 'accounts:update_user_profile'%}"><i class="fa fa-user active"></i>Edit Profile </a></li>
                             <li ><a href="{% url 'accounts:myads'%}"><i class="fa fa-bookmark-o"></i> My Ads</a></li>
                             <li><a href="" data-toggle="modal" data-target="#logoutaccount"><i class="fa fa-cog"></i> Logout</a></li>
                             <li><a href="" data-toggle="modal" data-target="#deleteaccount"><i class="fa fa-power-off"></i>Delete
@@ -158,6 +159,26 @@
 							</div>
 							<!-- Submit Button -->
 							<button class="btn btn-transparent">Change email</button>
+						</form>
+					</div>
+					</div>
+                    <div class="col-lg-6 col-md-6">
+						<!-- Change Password -->
+					<div class="widget change-password">
+						<h3 class="widget-header user">Edit Mobile No.</h3>
+						<form action="#">
+							<!-- Current Password -->
+							<div class="form-group">
+								<label for="current-password">Current Mobile No.</label>
+								<input type="number" class="form-control" id="current-password">
+							</div>
+							<!-- New Password -->
+							<div class="form-group">
+								<label for="new-password">New Mobile No.</label>
+								<input type="number" class="form-control" id="new-password">
+							</div>
+							<!-- Submit Button -->
+							<button class="btn btn-transparent">Change Mobile No.</button>
 						</form>
 					</div>
 					</div>

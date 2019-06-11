@@ -70,6 +70,9 @@ TEMPLATES = [
         },
     },
 ]
+
+TIME_ZONE =  'Asia/Kolkata'
+
 if DEBUG:
    STATICFILES_DIRS = [
    os.path.join(BASE_DIR, 'static'),

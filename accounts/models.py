@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
+from datetime import datetime
 from phonenumber_field.modelfields import PhoneNumberField
 
 # accounts.models.py
@@ -77,6 +78,7 @@ class User(AbstractBaseUser):
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False) # a admin user; non super-user
     admin = models.BooleanField(default=False) # a superuser
+    date = models.DateTimeField(default=datetime.now, blank=True, null = True)
     # notice the absence of a "Password field", that's built in.
 
     USERNAME_FIELD = 'email'

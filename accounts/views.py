@@ -71,38 +71,46 @@ def register_user(request):
             college_name = form.cleaned_data['college_name']
             user = User.objects.create_user(email=email, password=password_, first_name=first_name, last_name=last_name , phone=phone, college_name = college_name)
             user.save()
-            return redirect('home')
+            return redirect('product:home')
     else:
         form = UserRegisterForm()
     return render(request,'signup.html',{'form':form})
 
 def profile_view(request, *args, **kwargs):
-    return render(request, 'profile.html',{})
+    if request.user.is_authenticated:
+        return render(request, 'profile.html',{})
+    else:
+        return redirect('accounts:login')
 
 def update_user_profile(request):
-    if request.method == 'POST':
-        form = UserEditForm(request.POST)
-        print(form)
-        if form.is_valid():
-            user_info = request.user
-            user_info.first_name = form.cleaned_data['first_name']
-            user_info.last_name = form.cleaned_data['last_name']
-            print(user_info)
-            user_info.save()
-            print(user_info)
-            return redirect('home')
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = UserEditForm(request.POST)
+            print(form)
+            if form.is_valid():
+                user_info = request.user
+                user_info.first_name = form.cleaned_data['first_name']
+                user_info.last_name = form.cleaned_data['last_name']
+                print(user_info)
+                user_info.save()
+                print(user_info)
+                return redirect('product:home')
+        else:
+            form = UserEditForm()
+        return render(request, 'update.html', {'form': form})
     else:
-        form = UserEditForm()
-    return render(request, 'update.html', {'form': form})
+        return redirect('accounts:login')
+
 
 def my_ads_view(request):
-    print(request.user)
-    instance = Product.objects.filter(seller_id = request.user.pk)
-    print(instance)
-    context = {
+    if request.user.is_authenticated:
+        instance = Product.objects.filter(seller_id = request.user.pk)
+        context = {
             'query_set' : instance
         }
-    return render(request,"my_ads.html",context )
+        return render(request,"my_ads.html",context )
+    else:
+        return redirect('accounts:login')
 # def edit_product(request,slug):
 #     form_class = AddProductInfoForm
 #     form = form_class(request.POST or request.files or None)
