@@ -13,8 +13,9 @@ urlpatterns = [
     path('aboutus/', views.AboutUsPageView.as_view(), name= 'aboutus'),
     path('contactus/', views.ContactUsPageView.as_view(), name= 'contactus'),
     path('profile/update/', views.update_user_profile, name= 'update_user_profile'),
+    path('profile/update/phone', views.update_user_profile_phonenumber, name= 'update_user_profile_phonenumber'),
     path('profile/myad/', views.my_ads_view, name = 'myads'),
-    # path('profile/myad/editad/<str:slug>', views.edit_product, name = 'editad'),
+    path('profile/myad/editad/<str:slug>', views.edit_product, name = 'editad'),
   
 
 ]

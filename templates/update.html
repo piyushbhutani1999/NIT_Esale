@@ -79,7 +79,29 @@
 					<h2>Edit profile</h2>
 					<p>Here you can edit your details. Give accurate details for better selling</p>
 				</div>
-				<!-- Edit Personal Info -->
+{% for message in messages %}
+
+                    <div class="alert alert-danger">
+                        <a class="close" href="#" data-dismiss="alert">×</a>
+
+                        {{ message }}
+
+                    </div>
+            {% endfor %}
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
 				<div class="row">
 					<div class="col-lg-6 col-md-6">
 						<div class="widget personal-info">
@@ -94,6 +116,10 @@
 								<div class="form-group">
 									<label for="last-name">Last Name</label>
 									{{form.last_name}}
+								</div>
+																<div class="form-group">
+									<label for="last-name">Last Name</label>
+									{{form.phone}}
 								</div>
 								<!-- File chooser -->
 								{% comment %} <div class="form-group choose-file d-inline-flex">
@@ -113,7 +139,8 @@
 								  </label>
 								</div> {% endcomment %}
 								<!-- Submit button -->
-								<button type="submit" class="btn btn-transparent">Save My Changes</button>
+
+								<button type="submit" name="submitname" class="btn btn-transparent">Save My Changes</button>
 							</form>
 						</div>
 					</div>
@@ -142,6 +169,7 @@
 						</form>
 					</div>
 					</div>
+					{% comment %} 
 					<div class="col-lg-6 col-md-6">
 						<!-- Change Email Address -->
 					<div class="widget change-email mb-0">
@@ -166,11 +194,13 @@
 						<!-- Change Password -->
 					<div class="widget change-password">
 						<h3 class="widget-header user">Edit Mobile No.</h3>
-						<form action="#">
-							<!-- Current Password -->
+						<form action="#">{% csrf_token %}
+						{{form.as_p}}
+							{% comment %} <!-- Current Password -->
 							<div class="form-group">
 								<label for="current-password">Current Mobile No.</label>
 								<input type="number" class="form-control" id="current-password">
+								{{request.user.}}
 							</div>
 							<!-- New Password -->
 							<div class="form-group">
@@ -178,10 +208,10 @@
 								<input type="number" class="form-control" id="new-password">
 							</div>
 							<!-- Submit Button -->
-							<button class="btn btn-transparent">Change Mobile No.</button>
+							<button type ="submit" class="btn btn-transparent" name="submitphone">Change Mobile No.</button> 
 						</form>
 					</div>
-					</div>
+					</div> {% endcomment %}
 				</div>
 			</div>
 		</div>

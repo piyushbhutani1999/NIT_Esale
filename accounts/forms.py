@@ -94,4 +94,10 @@ class UserEditForm(forms.ModelForm):
         fields = [ 'first_name','last_name']
     first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Firstname','class': 'form-control'}))
     last_name  = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Lastname','class': 'form-control'}))
-    # password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Password','class': 'border p-3 w-100 my-2'}))
+    last_name  = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Lastname','class': 'form-control'}))
+    phone = PhoneNumberField(region = 'IN', max_length = 13,widget = forms.TextInput(attrs={'placeholder':'request.user.phone','class': 'border p-3 w-100 my-2'}))
+
+class UserPhoneEditForm(forms.Form):
+    new_phone = PhoneNumberField(region='IN', max_length =13)
+    old_phone = PhoneNumberField(region='IN', max_length =13)
+    confirm_phone = PhoneNumberField(region='IN', max_length =13)
